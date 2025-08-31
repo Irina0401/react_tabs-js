@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Tabs } from './components/Tabs';
 import 'bulma/css/bulma.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 import './App.scss';
@@ -9,12 +10,20 @@ export const tabs = [
   { id: 'tab-3', title: 'Tab 3', content: 'Some text 3' },
 ];
 
-const [activeTabId, setActiveTabId] = useState('tab-1');
+export const App = () => {
+  const [activeTabId, setActiveTabId] = useState('tab-1');
 
-export const App = () => (
-  <Tabs
-  tabs={tabs}
-  activeTabId={activeTabId}
-  onTabSelected={setActiveTabId}
-/>
-);
+  const activeTab = tabs.find(tab => tab.id === activeTabId);
+
+  return (
+    <>
+      <h1 className="title">Selected tab is {activeTab.title}</h1>
+
+      <Tabs
+        tabs={tabs}
+        activeTabId={activeTabId}
+        onTabSelected={setActiveTabId}
+      />
+    </>
+  );
+};
